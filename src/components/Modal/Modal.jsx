@@ -16,13 +16,11 @@ export class ModalWindow extends Component {
 
     handleKeyDown = e => {
             if (e.code === 'Escape') {
-                console.log(this.props)
                 this.props.onClose();
             }
     }
     
     handleOverlay = e => {
-        console.log(e)
         if (e.currentTarget === e.target) {
             this.props.onClose()
         }

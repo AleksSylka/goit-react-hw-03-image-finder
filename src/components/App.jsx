@@ -64,11 +64,13 @@ export class App extends Component {
   };
 
   handleModal = event => {
-    if (event.target.localName === 'img') {
+    const { localName, parentNode } = event.target
+    const {data} = this.state
+    if (localName === 'img' && parentNode.localName === 'li') {
       let i = this.state.data.findIndex(({webformatURL}) => (
         webformatURL === event.target.src
       ));
-      this.setState({ largeImageURL: this.state.data[i].largeImageURL, tags: this.state.data[i].tags });
+      this.setState({ largeImageURL: data[i].largeImageURL, tags: data[i].tags });
       this.toggleModal();
     }
   }
@@ -100,7 +102,7 @@ export class App extends Component {
         
         {showModal && (<RemoveScroll>
               <ModalWindow onClose={this.toggleModal} >
-                <img src={largeImageURL} alt={tags} width={'1000px'} />
+                <img src={largeImageURL} alt={tags}/>
               </ModalWindow>
             </RemoveScroll>)}
         
